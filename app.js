@@ -4,6 +4,7 @@ const mysql = require("mysql");
 
 const connection = mysql.createConnection({
   host: "localhost",
+  // Your port
   port: 3306,
   user: "root",
   // Your password
@@ -30,11 +31,9 @@ function start() {
                 "Add Department", 
                 "Add Role", 
                 "Add Employee", 
-                "Update Employee", 
                 "Delete Department", 
                 "Delete Role", 
                 "Delete Employee", 
-                "View Total Budget",
                 "Exit"
             ]
         }
@@ -58,16 +57,12 @@ function start() {
             deleteDepartment();
         }else if(userChoice.question === "Delete Employee"){
             deleteEmployee();
-        }else if(userChoice.question === "Update Employee"){
-            updateEmployee();
-        }else if(userChoice.question === "View Total Budget"){
-            viewTotalBudget();
         }else if(userChoice.question === "Exit"){
             exit();
         }
     })
 }
-// == VIEW FUNCTIONS ============================================================================================
+// == VIEW ============================================================================================
 function viewAllRoles(){
     connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title, role.salary AS Salary FROM employee LEFT JOIN role ON employee.role_id = role.id;", 
   function(err, res) {
@@ -94,7 +89,7 @@ function viewAllManagers(){
       start()
   })
 }
-// == VIEW ============================================================================================
+// == ADD ============================================================================================
 function addDepartment() {
     inquirer.prompt([
         {
@@ -103,10 +98,11 @@ function addDepartment() {
             message: "What is the department you'd like to add?"
         }
     ]).then( userChoice => {
-        connection.query("INSERT INTO department SET ?", {name: userChoice.dept},  function(err, userChoice) {
-            if (err) throw err;
-            console.table(userChoice);
-            start();
+        connection.query("INSERT INTO department SET ?",  {name: userChoice.dept},  
+            function(err, userChoice) {
+                if (err) throw err;
+                console.table(userChoice);
+                start();
       })
     });
 }
@@ -131,7 +127,7 @@ function addRole() {
             choices: selectDept()
           }
       ]).then(function(userChoice) {
-          connection.query("INSERT INTO role SET ?",
+            connection.query("INSERT INTO role SET ?",
               {
                 title: userChoice.title,
                 salary: userChoice.salary,
@@ -241,9 +237,6 @@ function selectEmployee(){
     return employeesArr;
 }
 
-function viewTotalBudget(){
-
-}
 // == DELETE ============================================================================================
 function deleteRole(){
     inquirer.prompt([       
@@ -258,10 +251,10 @@ function deleteRole(){
             message: "What is their role?",
             choices: selectRole()
         }
-    ]).then(res => {
-        connection.query("DELETE FROM role WHERE title=?", [res.role_id], function(err, res) {
+    ]).then(userChoice => {
+        connection.query("DELETE FROM role WHERE title=?", [userChoice.role_id], function(err, userChoice) {
             if(err) throw err;
-            console.table(res);
+            console.table(userChoice);
             start();
         })
     })
@@ -280,10 +273,10 @@ function deleteDepartment(){
             message: "What is the Department?",
             choices: selectDept()
         }
-    ]).then(res => {
-        connection.query("DELETE FROM department WHERE name=?", [res.department_name], function(err, res) {
+    ]).then(userChoice => {
+        connection.query("DELETE FROM department WHERE name=?", [userChoice.department_name], function(err, userChoice) {
             if(err) throw err;
-            console.table(res);
+            console.table(userChoice);
             start();
         })
     })
@@ -302,10 +295,10 @@ function deleteEmployee(){
             message: "What is the Employee's name?",
             choices: selectEmployee()
         }
-    ]).then(res => {
-        connection.query("DELETE FROM employee WHERE first_name=?", [res.name], function(err, res) {
+    ]).then(userChoice => {
+        connection.query("DELETE FROM employee WHERE first_name=?", [userChoice.name], function(err, userChoice) {
             if(err) throw err;
-            console.table(res);
+            console.table(userChoice);
             start();
         })
     })
