@@ -25,32 +25,32 @@ function start() {
             name: "question",
             message: "What would you like to do?",
             choices: [
-                "View All Employees by Department", 
-                "View All Employees by Role",
+                "View All Employees by Role", 
+                "View All Employees by Department",
                 "View All Employees by Manager",
                 "Add Department", 
                 "Add Role", 
                 "Add Employee", 
-                "Delete Department", 
                 "Delete Role", 
+                "Delete Department", 
                 "Delete Employee", 
                 "Exit"
             ]
         }
     ]).then(userChoice => {
         console.log(userChoice.question);
-        if(userChoice.question === "Add Department"){
-            addDepartment();
-        }else if(userChoice.question === "Add Role"){
-            addRole()
-        }else if(userChoice.question === "Add Employee"){
-            addEmployee();
-        }else if(userChoice.question === "View All Employees by Role"){
+        if(userChoice.question === "View All Employees by Role"){
             viewAllRoles();
         }else if(userChoice.question === "View All Employees by Department"){
             viewAllDepartments();
         }else if(userChoice.question === "View All Employees by Manager"){
             viewAllManagers();
+        }else if(userChoice.question === "Add Department"){
+            addDepartment();
+        }else if(userChoice.question === "Add Role"){
+            addRole()
+        }else if(userChoice.question === "Add Employee"){
+            addEmployee();
         }else if(userChoice.question === "Delete Role"){
             deleteRole();
         }else if(userChoice.question === "Delete Department"){
