@@ -13,8 +13,8 @@ A command line application to help keep track of employee's working for your bus
 # Installation
 1. open mySQL workbench and create the database with the schema provided.
 2. insert seed data.
-3. node app.js.
-4. npm install.
+3. npm install.
+4. node app.js.
 # Usage
 The user will be see a menu of options to view, add, or delete various things. Some options simply show data, others will have more questions to answer in order to complete the action. Results will appear in the terminal in table format.
 # Contributors
