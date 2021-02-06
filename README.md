@@ -10,6 +10,9 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 ## ![img](https://avatars0.githubusercontent.com/u/69053531?size=200)
 # Description
 A command line application to help keep track of employee's working for your business.
+
+## ![img](https://github.com/Jamgid/Employee-Tracker/blob/main/assets/images/Employee-Tracker.gif?raw=true)
+
 # Installation
 1. open mySQL workbench and create the database with the schema provided.
 2. insert seed data.
